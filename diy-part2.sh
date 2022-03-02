@@ -12,3 +12,13 @@
 
 # Modify default IP
 #sed -i 's/192.168.1.1/192.168.50.5/g' package/base-files/files/bin/config_generate
+
+git clone -b 18.06 https://github.com/jerrykuku/luci-theme-argon.git package/lean/luci-theme-argon
+# 替换默认主题为 luci-theme-argon
+sed -i 's/luci-theme-bootstrap/luci-theme-argon/' feeds/luci/collections/luci/Makefile
+#make menuconfig时记得勾选LuCI ---> Applications ---> luci-app-argon-config
+# Add openclash
+git clone --single-branch --branch master https://github.com/vernesong/OpenClash.git
+cd OpenClash
+mv luci-app-openclash ../package/lean/luci-app-openclash
+cd ..
